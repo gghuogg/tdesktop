@@ -286,6 +286,7 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 	auto result = object_ptr<Ui::VerticalLayout>(_wrap);
 	auto tracker = Ui::MultiSlideTracker();
 
+	/* // User Info ,Username,Mobile 
 	// Fill context for a mention / hashtag / bot command link.
 	const auto infoClickFilter = [=,
 		peer = _peer.get(),
@@ -553,8 +554,9 @@ object_ptr<Ui::RpWidget> DetailsFiller::setupInfo() {
 		result,
 		st::infoIconInformation,
 		st::infoInformationIconPosition);
-
+	*/
 	return result;
+	
 }
 
 object_ptr<Ui::RpWidget> DetailsFiller::setupMuteToggle() {
