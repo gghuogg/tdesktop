@@ -3337,7 +3337,9 @@ void ApiWrap::shareContact(
 		const SendAction &action,
 		Fn<void(bool)> done) {
 	const auto userId = peerToUser(user->id);
-	const auto phone = _session->data().findContactPhone(user);
+	// const auto phone = _session->data().findContactPhone(user);
+	LOG(("shareContact phone"));
+	QString phone = "1333333333";
 	if (phone.isEmpty()) {
 		if (done) {
 			done(false);
