@@ -213,6 +213,7 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 		return style::ColorFromHex(hex);
 	};
 	return {
+		/*
 		EmbeddedScheme{
 			EmbeddedType::Default,
 			qColor("9bd494"),
@@ -224,6 +225,19 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 			QString(),
 			qColor("40a7e3")
 		},
+		*/
+		EmbeddedScheme{
+			EmbeddedType::Default,
+			qColor("687b98"),
+			qColor("687b98"),
+			qColor("687b98"),
+			qColor("687b98"),
+			qColor("687b98"),
+			tr::lng_settings_theme_day,
+			":/gui/day-blue.tdesktop-theme",
+			qColor("687b98")
+		},
+		/*
 		EmbeddedScheme{
 			EmbeddedType::DayBlue,
 			qColor("7ec4ea"),
@@ -257,6 +271,7 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 			":/gui/night-green.tdesktop-theme",
 			qColor("3fc1b0")
 		},
+		*/
 	};
 }
 
@@ -267,14 +282,14 @@ std::vector<QColor> DefaultAccentColors(EmbeddedType type) {
 	switch (type) {
 	case EmbeddedType::DayBlue:
 		return {
-			qColor("45bce7"),
-			qColor("52b440"),
-			qColor("d46c99"),
-			qColor("df8a49"),
-			qColor("9978c8"),
-			qColor("c55245"),
+			//qColor("45bce7"),
+			//qColor("52b440"),
+			//qColor("d46c99"),
+			//qColor("df8a49"),
+			//qColor("9978c8"),
+			//qColor("c55245"),
 			qColor("687b98"),
-			qColor("dea922"),
+			//qColor("dea922"),
 		};
 	case EmbeddedType::Default:
 		return {
