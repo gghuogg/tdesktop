@@ -70,6 +70,9 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "styles/style_layers.h"
 #include "styles/style_menu_icons.h"
 #include "styles/style_window.h"
+#include <iostream>
+#include <string>
+
 
 namespace Settings {
 namespace {
@@ -1304,6 +1307,7 @@ void SetupDefaultThemes(
 	const auto group = std::make_shared<Ui::RadioenumGroup<Type>>(chosen());
 
 	const auto apply = [=](const Scheme &scheme) {
+
 		const auto isNight = [](const Scheme &scheme) {
 			const auto type = scheme.type;
 			return (type != Type::DayBlue) && (type != Type::Default);
@@ -1748,10 +1752,12 @@ rpl::producer<QString> Chat::title() {
 void Chat::setupContent(not_null<Window::SessionController*> controller) {
 	const auto content = Ui::CreateChild<Ui::VerticalLayout>(this);
 
-	SetupThemeOptions(controller, content);
+	// hide choose theme
+	// SetupThemeOptions(controller, content);
 	SetupAutoNightMode(controller, content);
 	SetupCloudThemes(controller, content);
-	SetupChatBackground(controller, content);
+	// hide choose chat background,
+	// SetupChatBackground(controller, content);
 	SetupStickersEmoji(controller, content);
 	SetupMessages(controller, content);
 	SetupArchive(controller, content);

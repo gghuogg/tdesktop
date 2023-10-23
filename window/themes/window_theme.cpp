@@ -386,7 +386,6 @@ bool InitializeFromCache(
 	if (cache.contentChecksum != base::crc32(content.constData(), content.size())) {
 		return false;
 	}
-
 	QImage background;
 	if (!cache.background.isEmpty()) {
 		QDataStream stream(cache.background);
@@ -396,7 +395,6 @@ bool InitializeFromCache(
 			return false;
 		}
 	}
-
 	if (!style::main_palette::load(cache.colors)) {
 		return false;
 	}
@@ -404,7 +402,6 @@ bool InitializeFromCache(
 	if (!background.isNull()) {
 		applyBackground(std::move(background), cache.tiled, nullptr);
 	}
-
 	return true;
 }
 
@@ -422,7 +419,6 @@ bool InitializeFromSaved(Saved &&saved) {
 			saved.object.pathAbsolute));
 		return false;
 	}
-
 	const auto editing = ReadEditingPalette();
 	GlobalBackground.createIfNull();
 	if (!editing && InitializeFromCache(saved.object.content, saved.cache)) {
@@ -430,6 +426,8 @@ bool InitializeFromSaved(Saved &&saved) {
 	}
 
 	const auto colorizer = ColorizerForTheme(saved.object.pathAbsolute);
+	LOG(("saved.cache.colors"));
+	LOG((saved.cache.colors));
 	if (!LoadTheme(saved.object.content, colorizer, editing, &saved.cache)) {
 		DEBUG_LOG(("Theme: Could not load from saved."));
 		return false;
