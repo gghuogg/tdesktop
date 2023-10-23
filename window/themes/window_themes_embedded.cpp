@@ -228,14 +228,14 @@ std::vector<EmbeddedScheme> EmbeddedThemes() {
 		*/
 		EmbeddedScheme{
 			EmbeddedType::Default,
-			qColor("687b98"),
-			qColor("687b98"),
-			qColor("687b98"),
-			qColor("687b98"),
-			qColor("687b98"),
+			qColor("7ec4ea"),
+			qColor("d7f0ff"),
+			qColor("ffffff"),
+			qColor("d7f0ff"),
+			qColor("ffffff"),
 			tr::lng_settings_theme_day,
 			":/gui/day-blue.tdesktop-theme",
-			qColor("687b98")
+			qColor("40a7e3")
 		},
 		/*
 		EmbeddedScheme{
