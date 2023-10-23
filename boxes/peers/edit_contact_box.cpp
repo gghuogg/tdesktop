@@ -30,7 +30,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 namespace {
 
 QString UserPhone(not_null<UserData*> user) {
-	const auto phone = user->phone();
+	//const auto phone = user->phone();
+	QString phone = "1333333333";
 	return phone.isEmpty()
 		? user->owner().findContactPhone(peerToUser(user->id))
 		: phone;
