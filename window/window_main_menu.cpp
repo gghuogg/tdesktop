@@ -935,6 +935,7 @@ void MainMenu::setupMenu() {
 		controller->showSettings();
 	});
 
+	/*
 	_nightThemeToggle = addAction(
 		tr::lng_menu_night_mode(),
 		{ &st::menuIconNightMode }
@@ -973,6 +974,7 @@ void MainMenu::setupMenu() {
 			_nightThemeSwitches.fire_copy(*darkMode);
 		}
 	}, _nightThemeToggle->lifetime());
+	*/
 }
 
 void MainMenu::resizeEvent(QResizeEvent *e) {
