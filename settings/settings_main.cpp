@@ -387,11 +387,12 @@ void SetupSections(
 		tr::lng_settings_advanced(),
 		Advanced::Id(),
 		{ &st::menuIconManage });
+	/*
 	addSection(
 		tr::lng_settings_section_call_settings(),
 		Calls::Id(),
 		{ &st::menuIconPhone });
-
+		*/
 	SetupPowerSavingButton(&controller->window(), container);
 	SetupLanguageButton(&controller->window(), container);
 
