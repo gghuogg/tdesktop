@@ -844,13 +844,14 @@ void MainMenu::setupMenu() {
 		)->setClickedCallback([=] {
 			controller->showNewGroup();
 		});
+		/*
 		addAction(
 			tr::lng_create_channel_title(),
 			{ &st::menuIconChannel }
 		)->setClickedCallback([=] {
 			controller->showNewChannel();
 		});
-
+		*/
 		const auto wrap = _menu->add(
 			object_ptr<Ui::SlideWrap<Ui::SettingsButton>>(
 				_menu,
