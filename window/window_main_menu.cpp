@@ -888,12 +888,14 @@ void MainMenu::setupMenu() {
 		)->setClickedCallback([=] {
 			controller->show(PrepareContactsBox(controller));
 		});
+		/*
 		addAction(
 			tr::lng_menu_calls(),
 			{ &st::menuIconPhone }
 		)->setClickedCallback([=] {
 			ShowCallsBox(controller);
 		});
+		*/
 		addAction(
 			tr::lng_saved_messages(),
 			{ &st::menuIconSavedMessages }
