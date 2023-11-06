@@ -882,13 +882,14 @@ void MainMenu::setupMenu() {
 		});
 
 		SetupMenuBots(_menu, controller);
-
+		/*
 		addAction(
 			tr::lng_menu_contacts(),
 			{ &st::menuIconProfile }
 		)->setClickedCallback([=] {
 			controller->show(PrepareContactsBox(controller));
 		});
+		*/
 		/*
 		addAction(
 			tr::lng_menu_calls(),
