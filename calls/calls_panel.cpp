@@ -88,6 +88,7 @@ Panel::Panel(not_null<Call*> call)
 		&st::callMicrophoneUnmute))
 , _name(widget(), st::callName)
 , _status(widget(), st::callStatus) {
+	/*
 	_layerBg->setStyleOverrides(&st::groupCallBox, &st::groupCallLayerBox);
 	_layerBg->setHideByBackgroundClick(true);
 
@@ -102,6 +103,7 @@ Panel::Panel(not_null<Call*> call)
 	initControls();
 	initLayout();
 	showAndActivate();
+	*/
 }
 
 Panel::~Panel() = default;
