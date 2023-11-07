@@ -335,13 +335,13 @@ HistoryWidget::HistoryWidget(
 		[=] { windowIsVisibleChanged(); });
 
 	initTabbedSelector();
-
+	/*
 	_attachToggle->setClickedCallback([=] {
 		base::call_delayed(st::historyAttach.ripple.hideDuration, this, [=] {
 			chooseAttach();
 		});
 	});
-
+	*/
 	const auto rawTextEdit = _field->rawTextEdit().get();
 	rpl::merge(
 		_field->scrollTop().changes() | rpl::to_empty,
@@ -486,7 +486,7 @@ HistoryWidget::HistoryWidget(
 
 	initVoiceRecordBar();
 
-	_attachToggle->hide();
+	//_attachToggle->hide();
 	_tabbedSelectorToggle->hide();
 	_botKeyboardShow->hide();
 	_botKeyboardHide->hide();
