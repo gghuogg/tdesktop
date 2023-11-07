@@ -421,6 +421,7 @@ void SendFilesBox::enqueueNextPrepare() {
 }
 
 void SendFilesBox::prepare() {
+	/*
 	initSendWay();
 	setupCaption();
 	setupSendWayControls();
@@ -435,6 +436,7 @@ void SendFilesBox::prepare() {
 	}, lifetime());
 
 	setupDragArea();
+	*/
 }
 
 void SendFilesBox::setupDragArea() {
