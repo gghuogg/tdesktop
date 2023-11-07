@@ -486,7 +486,7 @@ HistoryWidget::HistoryWidget(
 
 	initVoiceRecordBar();
 
-	//_attachToggle->hide();
+	_attachToggle->hide();
 	_tabbedSelectorToggle->hide();
 	_botKeyboardShow->hide();
 	_botKeyboardHide->hide();
