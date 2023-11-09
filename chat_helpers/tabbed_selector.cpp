@@ -306,6 +306,7 @@ std::unique_ptr<Ui::TabbedSearch> MakeSearch(
 	const auto owner = &session->data();
 	auto result = std::make_unique<Ui::TabbedSearch>(parent, st, Descriptor{
 		.st = st.search,
+		/*
 		.groups = (profilePhotoCategories
 			? owner->emojiStatuses().profilePhotoGroupsValue()
 			: statusCategories
@@ -314,13 +315,14 @@ std::unique_ptr<Ui::TabbedSearch> MakeSearch(
 		.customEmojiFactory = owner->customEmojiManager().factory(
 			Data::CustomEmojiManager::SizeTag::SetIcon,
 			Ui::SearchWithGroups::IconSizeOverride())
+			*/
 	});
-
+	/*
 	result->queryValue(
 	) | rpl::skip(1) | rpl::start_with_next(
 		std::move(callback),
 		parent->lifetime());
-
+	*/
 	return result;
 }
 
@@ -381,8 +383,8 @@ TabbedSelector::TabbedSelector(
 , _hasGifsTab(ranges::contains(_tabs, SelectorTab::Gifs, &Tab::type))
 , _hasMasksTab(ranges::contains(_tabs, SelectorTab::Masks, &Tab::type))
 , _tabbed(_tabs.size() > 1) {
-	resize(st::emojiPanWidth, st::emojiPanMaxHeight);
-
+	//resize(st::emojiPanWidth, st::emojiPanMaxHeight);
+	/*
 	for (auto &tab : _tabs) {
 		tab.footer()->hide();
 		tab.widget()->hide();
@@ -482,6 +484,7 @@ TabbedSelector::TabbedSelector(
 	//setAttribute(Qt::WA_AcceptTouchEvents);
 	setAttribute(Qt::WA_OpaquePaintEvent, false);
 	showAll();
+	*/
 	hide();
 }
 
