@@ -1024,8 +1024,9 @@ void HistoryWidget::initVoiceRecordBar() {
 }
 
 void HistoryWidget::initTabbedSelector() {
+	/*
 	refreshTabbedPanel();
-
+	
 	_tabbedSelectorToggle->addClickHandler([=] {
 		if (_tabbedPanel && _tabbedPanel->isHidden()) {
 			_tabbedPanel->showAnimated();
@@ -1033,7 +1034,7 @@ void HistoryWidget::initTabbedSelector() {
 			toggleTabbedSelectorMode();
 		}
 	});
-
+	
 	const auto selector = controller()->tabbedSelector();
 
 	base::install_event_filter(this, selector, [=](not_null<QEvent*> e) {
@@ -1113,6 +1114,7 @@ void HistoryWidget::initTabbedSelector() {
 			session().sendProgressManager().cancel(_history, type);
 		}
 	}, lifetime());
+	*/
 }
 
 void HistoryWidget::supportInitAutocomplete() {
