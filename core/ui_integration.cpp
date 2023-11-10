@@ -219,6 +219,7 @@ bool UiIntegration::handleUrlClick(
 		const QString &url,
 		const QVariant &context) {
 	LOG(("UiIntegration::handleUrlClick"));
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	/*
 	const auto local = Core::TryConvertUrlToLocal(url);
 	if (Core::InternalPassportLink(local)) {
