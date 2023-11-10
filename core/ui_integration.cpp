@@ -218,6 +218,8 @@ std::shared_ptr<ClickHandler> UiIntegration::createLinkHandler(
 bool UiIntegration::handleUrlClick(
 		const QString &url,
 		const QVariant &context) {
+	LOG(("UiIntegration::handleUrlClick"));
+	/*
 	const auto local = Core::TryConvertUrlToLocal(url);
 	if (Core::InternalPassportLink(local)) {
 		return true;
@@ -240,6 +242,7 @@ bool UiIntegration::handleUrlClick(
 	if (skip || !BotAutoLogin(url, domain, context)) {
 		File::OpenUrl(UrlWithAutoLoginToken(url, std::move(parsed), domain));
 	}
+	*/
 	return true;
 }
 
