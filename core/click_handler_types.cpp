@@ -199,6 +199,7 @@ QString MentionClickHandler::copyToClipboardContextItemText() const {
 }
 
 void MentionClickHandler::onClick(ClickContext context) const {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	const auto button = context.button;
 	if (button == Qt::LeftButton || button == Qt::MiddleButton) {
 		const auto my = context.other.value<ClickHandlerContext>();
@@ -210,10 +211,12 @@ void MentionClickHandler::onClick(ClickContext context) const {
 			: nullptr;
 		if (use) {
 			using Info = Window::SessionNavigation::PeerByLinkInfo;
+			/*
 			use->showPeerByLink(Info{
 				.usernameOrId = _tag.mid(1),
 				.resolveType = Window::ResolveType::Mention,
 			});
+			*/
 		}
 	}
 }
