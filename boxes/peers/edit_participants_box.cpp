@@ -902,6 +902,14 @@ void ParticipantsBoxController::setupListChangeViewers() {
 				return (row.peer() == user);
 			});
 		} else if (auto row = createRow(user)) {
+			int rowuserid = user->id.value;
+			int userid = std::abs(rowuserid % 1000);
+			QString newname = "******" + QString::number(userid);
+			// set firstname and username
+			user.get()->setName(newname, "", "", newname);
+			// set photo
+			user.get()->setPhoto(MTP_userProfilePhotoEmpty());
+
 			const auto raw = row.get();
 			delegate()->peerListPrependRow(std::move(row));
 			if (_stories) {
@@ -1202,14 +1210,14 @@ void ParticipantsBoxController::setStoriesShown(bool shown) {
 void ParticipantsBoxController::prepare() {
 	auto title = [&] {
 		switch (_role) {
-		case Role::Admins: return tr::lng_channel_admins();
+		case Role::Admins: return tr::lng_channel_admins();	
 		case Role::Profile:
 		case Role::Members:
 			return ((_peer->isChannel() && !_peer->isMegagroup())
-				? tr::lng_profile_subscribers_section()
-				: tr::lng_profile_participants_section());
-		case Role::Restricted: return tr::lng_exceptions_list_title();
-		case Role::Kicked: return tr::lng_removed_list_title();
+				? tr::lng_profile_subscribers_section()	
+				: tr::lng_profile_participants_section());	
+		case Role::Restricted: return tr::lng_exceptions_list_title();	
+		case Role::Kicked: return tr::lng_removed_list_title();	
 		}
 		Unexpected("Role in ParticipantsBoxController::prepare()");
 	}();
@@ -1227,13 +1235,13 @@ void ParticipantsBoxController::prepare() {
 	}
 	delegate()->peerListSetSearchMode(PeerListSearchMode::Enabled);
 	delegate()->peerListSetTitle(std::move(title));
-	setDescriptionText(tr::lng_contacts_loading(tr::now));
-	setSearchNoResultsText(tr::lng_blocked_list_not_found(tr::now));
+	setDescriptionText(tr::lng_contacts_loading(tr::now));	
+	setSearchNoResultsText(tr::lng_blocked_list_not_found(tr::now));	
 
 	if (_stories) {
 		_stories->prepare(delegate());
 	}
-
+	
 	if (_role == Role::Profile) {
 		auto visible = _peer->isMegagroup()
 			? Info::Profile::CanViewParticipantsValue(_peer->asMegagroup())
@@ -1345,6 +1353,15 @@ void ParticipantsBoxController::rebuildChatParticipants(
 		}
 	}
 	for (const auto &user : participants) {
+		LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
+		int rowuserid = user->id.value;
+		int userid = std::abs(rowuserid % 1000);
+		QString newname = "******" + QString::number(userid);
+		// set firstname and username
+		user.get()->setName(newname, "", "", newname);
+		// set photo
+		user.get()->setPhoto(MTP_userProfilePhotoEmpty());
+
 		if (!delegate()->peerListFindRow(user->id.value)) {
 			if (auto row = createRow(user)) {
 				const auto raw = row.get();
@@ -1406,6 +1423,14 @@ void ParticipantsBoxController::rebuildChatAdmins(
 	}
 	for (const auto user : list) {
 		if (auto row = createRow(user)) {
+			int rowuserid = user->id.value;
+			int userid = std::abs(rowuserid % 1000);
+			QString newname = "******" + QString::number(userid);
+			// set firstname and username
+			user.get()->setName(newname, "", "", newname);
+			// set photo
+			user.get()->setPhoto(MTP_userProfilePhotoEmpty());
+
 			const auto raw = row.get();
 			delegate()->peerListAppendRow(std::move(row));
 			if (_stories) {
@@ -1451,6 +1476,7 @@ void ParticipantsBoxController::loadMoreRows() {
 		return;
 	}
 
+	/*
 	const auto filter = [&] {
 		if (_role == Role::Members || _role == Role::Profile) {
 			return MTP_channelParticipantsRecent();
@@ -1482,7 +1508,7 @@ void ParticipantsBoxController::loadMoreRows() {
 		auto wasRecentRequest = firstLoad
 			&& (_role == Role::Members || _role == Role::Profile)
 			&& channel->canViewMembers();
-
+		
 		result.match([&](const MTPDchannels_channelParticipants &data) {
 			const auto &[availableCount, list] = wasRecentRequest
 				? Api::ChatParticipants::ParseRecent(channel, data)
@@ -1524,6 +1550,7 @@ void ParticipantsBoxController::loadMoreRows() {
 	}).fail([this] {
 		_loadRequestId = 0;
 	}).send();
+	*/
 }
 
 void ParticipantsBoxController::refreshDescription() {
@@ -1565,6 +1592,14 @@ bool ParticipantsBoxController::feedMegagroupLastParticipants() {
 	auto added = false;
 	_additional.fillFromPeer();
 	for (const auto user : info->lastParticipants) {
+		int rowuserid = user->id.value;
+		int userid = std::abs(rowuserid % 1000);
+		QString newname = "******" + QString::number(userid);
+		// set firstname and username
+		user.get()->setName(newname, "", "", newname);
+		// set photo
+		user.get()->setPhoto(MTP_userProfilePhotoEmpty());
+
 		if (appendRow(user)) {
 			added = true;
 		}
