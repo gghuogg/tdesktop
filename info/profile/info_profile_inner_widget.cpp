@@ -67,7 +67,9 @@ InnerWidget::InnerWidget(
 
 object_ptr<Ui::RpWidget> InnerWidget::setupContent(
 		not_null<RpWidget*> parent) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	auto result = object_ptr<Ui::VerticalLayout>(parent);
+	/*
 	if (const auto user = _peer->asUser()) {
 		user->session().changes().peerFlagsValue(
 			user,
@@ -120,6 +122,7 @@ object_ptr<Ui::RpWidget> InnerWidget::setupContent(
 	if (_peer->isChat() || _peer->isMegagroup()) {
 		setupMembers(result.data());
 	}
+	*/
 	return result;
 }
 
