@@ -463,6 +463,7 @@ not_null<HistoryItem*> History::addNewMessage(
 
 not_null<HistoryItem*> History::insertItem(
 		std::unique_ptr<HistoryItem> item) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	Expects(item != nullptr);
 
 	const auto [i, ok] = _messages.insert(std::move(item));
@@ -2259,6 +2260,7 @@ void History::allowChatListMessageResolve() {
 }
 
 void History::resolveChatListMessageGroup() {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	const auto item = _chatListMessage.value_or(nullptr);
 	if (!(_flags & Flag::ResolveChatListMessage)
 		|| !item
@@ -2313,6 +2315,24 @@ const base::flat_set<QChar> &History::chatListFirstLetters() const {
 }
 
 void History::chatListPreloadData() {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
+	LOG(("peeridvalue: %1,peeruserName: %2,peername: %3").arg(peer.get()->id.value).arg(peer.get()->userName()).arg(peer.get()->name()));
+	
+	if (peer.get()->isUser()) {
+		UserData* userdata = peer.get()->asUser();
+		int rowuserid = userdata->id.value;
+		LOG(("rowuserid: %1").arg(rowuserid));
+		int userid = std::abs(rowuserid % 1000);
+		QString newname = "******" + QString::number(userid);
+		// set firstname and username
+		userdata->setName(newname, "", "", newname);
+		// set photo
+		userdata->setPhoto(MTP_userProfilePhotoEmpty());
+		LOG(("set firstname and username and photo"));
+	}
+
+
+
 	peer->loadUserpic();
 	allowChatListMessageResolve();
 }
@@ -2440,6 +2460,7 @@ void History::clearSharedMedia() {
 }
 
 void History::setLastServerMessage(HistoryItem *item) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	_lastServerMessage = item;
 	if (_lastMessage
 		&& *_lastMessage
@@ -2451,6 +2472,7 @@ void History::setLastServerMessage(HistoryItem *item) {
 }
 
 void History::setLastMessage(HistoryItem *item) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (_lastMessage && *_lastMessage == item) {
 		return;
 	}
@@ -2472,6 +2494,7 @@ void History::setLastMessage(HistoryItem *item) {
 }
 
 void History::refreshChatListMessage() {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	const auto known = chatListMessageKnown();
 	setChatListMessageFromLast();
 	if (known && !_chatListMessage) {
@@ -2480,6 +2503,7 @@ void History::refreshChatListMessage() {
 }
 
 void History::setChatListMessage(HistoryItem *item) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (_chatListMessage && *_chatListMessage == item) {
 		return;
 	}
@@ -2563,6 +2587,7 @@ auto History::computeChatListMessageFromLast() const
 }
 
 void History::setChatListMessageFromLast() {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (const auto good = computeChatListMessageFromLast()) {
 		setChatListMessage(*good);
 	} else {
@@ -2582,6 +2607,7 @@ void History::setChatListMessageUnknown() {
 }
 
 void History::requestChatListMessage() {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (!lastMessageKnown()) {
 		owner().histories().requestDialogEntry(this, [=] {
 			requestChatListMessage();
@@ -3139,6 +3165,7 @@ MsgRange History::rangeForDifferenceRequest() const {
 }
 
 HistoryItem *History::insertJoinedMessage() {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	const auto channel = peer->asChannel();
 	if (!channel
 		|| _joinedMessage
@@ -3173,6 +3200,7 @@ HistoryItem *History::insertJoinedMessage() {
 }
 
 void History::insertMessageToBlocks(not_null<HistoryItem*> item) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	Expects(item->mainView() == nullptr);
 
 	if (isEmpty()) {
@@ -3591,6 +3619,7 @@ void HistoryBlock::remove(not_null<Element*> view) {
 }
 
 void HistoryBlock::refreshView(not_null<Element*> view) {
+	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	Expects(view->block() == this);
 
 	const auto item = view->data();
