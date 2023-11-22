@@ -1147,7 +1147,7 @@ float64 MainWidget::chatBackgroundProgress() const {
 }
 
 void MainWidget::checkChatBackground() {
-	if (!_background || _background->generating) {
+ 	if (!_background || _background->generating) {
 		return;
 	}
 	const auto &media = _background->dataMedia;
@@ -1412,22 +1412,35 @@ void MainWidget::showHistory(
 		&& way != Way::Forward) {
 		clearBotStartToken(_history->peer());
 	}
-	_history->showHistory(peerId, showAtMsgId);
+
+	auto peerdata = session().data().peerLoaded(peerId);
+	if (peerdata->isUser()) {
+		LOG(("isUser"));
+	}
+	else if (peerdata->isChat()) {
+		LOG(("isChat"));
+		_history->showHistory(peerId, showAtMsgId);
+	}
+	else if (peerdata->isChannel()) {
+		LOG(("isChannel"));
+	}
+	//_history->showHistory(peerId, showAtMsgId);
+
 	if (alreadyThatPeer && params.reapplyLocalDraft) {
 		_history->applyDraft(HistoryWidget::FieldHistoryAction::NewEntry);
 	}
-
+	
 	auto noPeer = !_history->peer();
 	auto onlyDialogs = noPeer && isOneColumn();
 	_mainSection.destroy();
 
 	updateControlsGeometry();
-
+	
 	if (noPeer) {
 		_controller->setActiveChatEntry(Dialogs::Key());
 		_controller->setChatStyleTheme(_controller->defaultChatTheme());
 	}
-
+	
 	if (onlyDialogs) {
 		Assert(_dialogs != nullptr);
 		_history->hide();
