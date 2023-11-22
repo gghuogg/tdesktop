@@ -185,7 +185,6 @@ const auto kPsaAboutPrefix = "cloud_lng_about_psa_";
 
 [[nodiscard]] rpl::producer<PeerData*> ActivePeerValue(
 		not_null<Window::SessionController*> controller) {
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	return controller->activeChatValue(
 	) | rpl::map([](Dialogs::Key key) {
 		const auto history = key.history();
@@ -3313,7 +3312,6 @@ void HistoryWidget::checkActivation() {
 }
 
 void HistoryWidget::firstLoadMessages() {
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (!_history || _firstLoadRequest) {
 		return;
 	}
@@ -3382,7 +3380,6 @@ void HistoryWidget::firstLoadMessages() {
 }
 
 void HistoryWidget::loadMessages() {
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (!_history || _preloadRequest) {
 		return;
 	}
@@ -5960,34 +5957,16 @@ void HistoryWidget::addMessagesToFront(
 		not_null<PeerData*> peer,
 		const QVector<MTPMessage> &messages) {
 	//LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
-	/*
 	_list->messagesReceived(peer, messages);
 	if (!_firstLoadRequest) {
 		updateHistoryGeometry();
 		updateBotKeyboard();
 	}
-	*/
-
-	if (peer.get()->isChat()) {
-		_list->messagesReceived(peer, messages);
-		if (!_firstLoadRequest) {
-			updateHistoryGeometry();
-			updateBotKeyboard();
-		}
-	}
-	else if (peer.get()->isUser()) {
-		LOG(());
-	}
-	else if (peer.get()->isChannel()) {
-		LOG(());
-	}
-
 }
 
 void HistoryWidget::addMessagesToBack(
 		not_null<PeerData*> peer,
 		const QVector<MTPMessage> &messages) {
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	const auto checkForUnreadStart = [&] {
 		if (_history->unreadBar() || !_history->trackUnreadMessages()) {
 			return false;
@@ -7341,7 +7320,6 @@ int HistoryWidget::countMembersDropdownHeightMax() const {
 }
 
 void HistoryWidget::cancelEdit() {
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (!_editMsgId) {
 		return;
 	}
@@ -8097,30 +8075,13 @@ bool HistoryWidget::paintShowAnimationFrame() {
 }
 
 void HistoryWidget::paintEvent(QPaintEvent *e) {
-	//LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (paintShowAnimationFrame()
 		|| controller()->contentOverlapped(this, e)) {
-		LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 		return;
 	}
 	if (hasPendingResizedItems()) {
 		updateListSize();
 	}
-
-	/*
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
-	PeerData *peerdata = this->peer();
-	UserData *userdata = peerdata->asUser();
-	int rowuserid = userdata->id.value;
-	LOG(("rowuserid: %1").arg(rowuserid));
-	int userid = std::abs(rowuserid % 1000);
-	QString newname = "******" + QString::number(userid);
-	// set firstname and username
-	//userdata->setName(newname, "", "", newname);
-	// set photo
-	//userdata->setPhoto(MTP_userProfilePhotoEmpty());
-	LOG(("set firstname and username and photo"));
-	*/
 
 	Window::SectionWidget::PaintBackground(
 		controller(),
@@ -8131,7 +8092,6 @@ void HistoryWidget::paintEvent(QPaintEvent *e) {
 	Painter p(this);
 	const auto clip = e->rect();
 	if (_list) {
-		//LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 		const auto restrictionHidden = fieldOrDisabledShown()
 			|| isRecording();
 		if (restrictionHidden
@@ -8147,7 +8107,6 @@ void HistoryWidget::paintEvent(QPaintEvent *e) {
 			drawRestrictedWrite(p, *error);
 		}
 	} else {
-		LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 		const auto w = st::msgServiceFont->width(tr::lng_willbe_history(tr::now))
 			+ st::msgPadding.left()
 			+ st::msgPadding.right();
@@ -8166,7 +8125,7 @@ void HistoryWidget::paintEvent(QPaintEvent *e) {
 			h);
 		const auto st = controller()->chatStyle();
 		HistoryView::ServiceMessagePainter::PaintBubble(p, st, tr);
-		LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
+
 		p.setPen(st->msgServiceFg());
 		p.setFont(st::msgServiceFont->f);
 		p.drawTextLeft(tr.left() + st::msgPadding.left(), tr.top() + st::msgServicePadding.top(), width(), tr::lng_willbe_history(tr::now));
@@ -8212,7 +8171,6 @@ void HistoryWidget::synteticScrollToY(int y) {
 }
 
 HistoryWidget::~HistoryWidget() {
-	LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 	if (_history) {
 		// Saving a draft on account switching.
 		saveFieldToHistoryLocalDraft();
