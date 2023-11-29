@@ -652,7 +652,7 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
 				if (xadd || yadd) {
 					p.translate(xadd, yadd);
 				}
-				paintRow(row, (row->key() == selected), true);
+				paintRow(row, (row->key() == selected), true); 
 				if (xadd || yadd) {
 					p.translate(-xadd, -yadd);
 				}
@@ -675,24 +675,72 @@ void InnerWidget::paintEvent(QPaintEvent *e) {
 				p.translate(0, top - skippedTop);
 				for (auto e = list.cend(); i != e; ++i) {
 					auto row = (*i);
+
+					
+					const auto history = row->history();
+					const auto peer = history ? history->peer.get() : nullptr;
+					if (peer->isUser()) {
+					}
+					else if (peer->isChat()) {
+						LOG(("row: isChat and userName is %1").arg(peer->name()));
+						if (top >= dialogsClip.top() - skip + dialogsClip.height()) {
+							break;
+						}
+
+						// Skip currently dragged chat to paint it above others after.
+						if (row->index() != promoted + _aboveIndex || _aboveIndex < 0) {
+							paintDialog(row);
+						}
+
+						p.translate(0, row->height());
+						top += row->height();
+					}
+					else if (peer->isChannel()) {
+					}
+					else {
+					}
+					
+
+
+					/*
 					if (top >= dialogsClip.top() - skip + dialogsClip.height()) {
 						break;
 					}
 
 					// Skip currently dragged chat to paint it above others after.
 					if (row->index() != promoted + _aboveIndex || _aboveIndex < 0) {
+						LOG(("FilePath: '%1',LineNum: '%2',FuncTion: %3 ").arg(__FILE__).arg(__LINE__).arg(__FUNCTION__));
 						paintDialog(row);
 					}
 
 					p.translate(0, row->height());
 					top += row->height();
+					*/
 				}
 
 				// Paint the dragged chat above all others.
 				if (reorderingRow) {
+					
+					const auto history = reorderingRow->history();
+					const auto peer = history ? history->peer.get() : nullptr;
+					if (peer->isUser()) {
+					}
+					else if (peer->isChat()) {
+						LOG(("reorderingRow: isChat and userName is %1").arg(peer->name()));
+						p.translate(0, reorderingRow->top() - top);
+						paintDialog(reorderingRow);
+						p.translate(0, top - reorderingRow->top());
+					}
+					else if (peer->isChannel()) {
+					}
+					else {
+					}
+					
+					/*
 					p.translate(0, reorderingRow->top() - top);
 					paintDialog(reorderingRow);
 					p.translate(0, top - reorderingRow->top());
+					*/
 				}
 			}
 		} else {
