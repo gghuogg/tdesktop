@@ -1413,6 +1413,7 @@ void MainWidget::showHistory(
 		clearBotStartToken(_history->peer());
 	}
 
+	/*
 	auto peerdata = session().data().peerLoaded(peerId);
 	if (peerdata->isUser()) {
 		LOG(("isUser"));
@@ -1424,7 +1425,9 @@ void MainWidget::showHistory(
 	else if (peerdata->isChannel()) {
 		LOG(("isChannel"));
 	}
-	//_history->showHistory(peerId, showAtMsgId);
+	*/
+	_history->showHistory(peerId, showAtMsgId);
+
 
 	if (alreadyThatPeer && params.reapplyLocalDraft) {
 		_history->applyDraft(HistoryWidget::FieldHistoryAction::NewEntry);
